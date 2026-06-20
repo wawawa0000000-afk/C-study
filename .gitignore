@@ -1,0 +1,20 @@
+# Unrealプロジェクト共通の除外（CppBridgeLearning配下に適用される）
+CppBridgeLearning/Intermediate/
+CppBridgeLearning/Saved/
+CppBridgeLearning/Binaries/
+CppBridgeLearning/DerivedDataCache/
+CppBridgeLearning/.vs/
+CppBridgeLearning/*.sln
+
+# 素のC++プロジェクト側（CppBasics）は基本的に全部上げてOKなので、
+# ビルド成果物だけ除外
+# 素のC++プロジェクト（CppBasics）はビルド成果物だけ除外
+CppBasics/**/x64/
+CppBasics/**/.vs/
+CppBasics/**/*.obj
+CppBasics/**/*.ilk
+CppBasics/**/*.pdb
+CppBasics/**/*.log
+CppBasics/**/*.tlog/
+CppBasics/**/*.recipe
+CppBasics/*.vcxproj.user
