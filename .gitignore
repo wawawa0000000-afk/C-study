@@ -18,3 +18,6 @@ CppBasics/**/*.log
 CppBasics/**/*.tlog/
 CppBasics/**/*.recipe
 CppBasics/*.vcxproj.user
+
+# Visual Studio ユーザー設定（全プロジェクト共通）
+**/.vs/
