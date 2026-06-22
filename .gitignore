@@ -21,3 +21,6 @@ CppBasics/*.vcxproj.user
 
 # Visual Studio ユーザー設定（全プロジェクト共通）
 **/.vs/
+# OS関連
+.DS_Store
+Thumbs.db
