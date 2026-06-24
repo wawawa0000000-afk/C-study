@@ -15,6 +15,8 @@ void ABridgeLearningActor::BeginPlay()
 {
 	Super::BeginPlay();
 
+	ensure(TestNumber >= 0);
+
 	if (GEngine)
 	{
 		FString Message = FString::Printf(TEXT("TestNumber = %d"), TestNumber);

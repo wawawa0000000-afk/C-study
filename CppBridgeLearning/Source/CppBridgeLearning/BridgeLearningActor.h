@@ -15,7 +15,7 @@ public:
 	// Sets default values for this actor's properties
 	ABridgeLearningActor();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BridgeLearning")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "BridgeLearning")
 	int32 TestNumber;
 
 protected:

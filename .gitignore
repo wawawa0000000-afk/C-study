@@ -18,6 +18,10 @@ CppBasics/**/*.log
 CppBasics/**/*.tlog/
 CppBasics/**/*.recipe
 CppBasics/*.vcxproj.user
+# 動作確認用の未保存レベル(Untitledから保存されたファイル群)
+CppBridgeLearning/Content/Untitled*
+CppBridgeLearning/Content/__ExternalActors__/
+CppBridgeLearning/Content/__ExternalObjects__/
 
 # Visual Studio ユーザー設定（全プロジェクト共通）
 **/.vs/
