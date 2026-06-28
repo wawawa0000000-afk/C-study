@@ -7,6 +7,7 @@ class FCppBridgeLearningGameModule : public FDefaultGameModuleImpl
 public:
 	virtual void StartupModule() override
 	{
+		//Šm”F‚Å‚«‚Ä‚¢‚È‚¢
 		UE_LOG(LogTemp, Warning, TEXT("Hello from CppBridgeLearning!"));
 
 		if (GEngine)

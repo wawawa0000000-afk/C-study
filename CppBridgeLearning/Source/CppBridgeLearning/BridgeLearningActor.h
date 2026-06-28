@@ -6,6 +6,11 @@
 #include "GameFramework/Actor.h"
 #include "BridgeLearningActor.generated.h"
 
+template<typename T>
+T MyMax(T A, T B)
+{
+	return (A > B) ? A : B;
+}
 UCLASS()
 class CPPBRIDGELEARNING_API ABridgeLearningActor : public AActor
 {
@@ -15,8 +20,11 @@ public:
 	// Sets default values for this actor's properties
 	ABridgeLearningActor();
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "BridgeLearning")
-	int32 TestNumber;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "BridgeLearning")
+	TArray<int32> ScoreArray;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TMap<int32, FString> ItemNameCache;
 
 protected:
 	// Called when the game starts or when spawned
