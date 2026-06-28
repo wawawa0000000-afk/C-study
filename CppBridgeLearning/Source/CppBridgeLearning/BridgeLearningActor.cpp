@@ -84,16 +84,22 @@ void ABridgeLearningActor::BeginPlay()
 	Key2.ItemType = TEXT("Sword");
 	Key2.Rarity = 3;
 
+	// Key1とは全く違う内容（衝突実験用）
+	FItemKey Key3;
+	Key3.ItemType = TEXT("Shield");
+	Key3.Rarity = 99;
+
 	// 内容が同じなら、GetTypeHashは同じ値を返すはず
 	uint32 HashValue1 = GetTypeHash(Key1);
 	uint32 HashValue2 = GetTypeHash(Key2);
 	UE_LOG(LogTemp, Warning, TEXT("FItemKey Hash (Key1) = %u"), HashValue1);
 	UE_LOG(LogTemp, Warning, TEXT("FItemKey Hash (Key2) = %u"), HashValue2);
 
+	TMap<FItemKey, FString> KeyTestMap;
+
 	// Key1でAddして、Key2（別インスタンス・同内容）でFindする。
 	// これが成功すれば、operator==とGetTypeHashが正しく連携している証拠になる
 	// （TMapがKey1とKey2を「同じキー」として扱えている）。
-	TMap<FItemKey, FString> KeyTestMap;
 	KeyTestMap.Add(Key1, TEXT("Excalibur"));
 
 	FString* KeyTestResult = KeyTestMap.Find(Key2);
@@ -104,6 +110,26 @@ void ABridgeLearningActor::BeginPlay()
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Key2 lookup failed"));
+	}
+
+	// ハッシュ衝突の実験：
+	// GetTypeHashが現在 return 0; の仮実装なので、Key1とKey3は
+	// 内容が違っても「同じ棚」に入る（=衝突する）。
+	// それでもoperator==による最終比較のおかげで、それぞれ正しい値が
+	// 見つかるはず。ハッシュは検索の手がかりに過ぎず、
+	// 最終判定は必ずoperator==が行うことを確認する。
+	KeyTestMap.Add(Key3, TEXT("IronWall"));
+
+	FString* Key1Result = KeyTestMap.Find(Key1);
+	if (Key1Result)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Found via Key1: %s"), **Key1Result);
+	}
+
+	FString* Key3Result = KeyTestMap.Find(Key3);
+	if (Key3Result)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Found via Key3: %s"), **Key3Result);
 	}
 }
 
