@@ -131,6 +131,31 @@ void ABridgeLearningActor::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Found via Key3: %s"), **Key3Result);
 	}
+
+	// HandleDamageTaken‚ğOnDamageTaken‚É“o˜^‚·‚éiC#‚Ì += ‚É‘Š“–j
+	OnDamageTaken.AddDynamic(this, &ABridgeLearningActor::HandleDamageTaken);
+	OnDamageTaken.AddDynamic(this, &ABridgeLearningActor::HitDamageTaken);
+	OnDamageTaken.AddDynamic(this, &ABridgeLearningActor::HitDamageTaken);
+	// “o˜^‚³‚ê‚½ŠÖ”‚ğ‘S•”ŒÄ‚Ño‚·iC#‚ÌInvoke‚É‘Š“–j
+	OnDamageTaken.Broadcast(50);
+
+	UE_LOG(LogTemp, Warning, TEXT("Total Damage = %d"), TotalDamage);
+
+	OnHitDamageTaken.AddDynamic(this, &ABridgeLearningActor::HitDamageTaken);
+	OnHitDamageTaken.Broadcast(90);
+	OnHitDamageTaken.Broadcast(180);
+}
+
+void ABridgeLearningActor::HandleDamageTaken(int32 DamageAmount)
+{
+	TotalDamage += DamageAmount;  // ©•ª‚Ì’S“–•ª‚ğ‚±‚±‚É‘«‚µ‚Ş
+	UE_LOG(LogTemp, Warning, TEXT("Damage Taken: %d"), DamageAmount);
+}
+
+void ABridgeLearningActor::HitDamageTaken(int32 DamageAmount)
+{
+	TotalDamage += DamageAmount;  // ‚±‚¿‚ç‚à“¯‚¶•Ï”‚É‘«‚µ‚Ş
+	UE_LOG(LogTemp, Warning, TEXT("HitDamage Taken: %d"), DamageAmount);
 }
 
 // Called every frame

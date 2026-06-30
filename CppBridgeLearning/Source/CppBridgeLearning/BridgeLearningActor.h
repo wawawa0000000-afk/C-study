@@ -62,6 +62,8 @@ FORCEINLINE uint32 GetTypeHash(const FItemKey& Key)
 	return HashCombine(TypeHash, RarityHash);
 }
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDamageTakenSignature, int32, DamageAmount);
+
 UCLASS()
 class CPPBRIDGELEARNING_API ABridgeLearningActor : public AActor
 {
@@ -79,6 +81,22 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TMap<int32, FString> ItemNameCache;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnDamageTakenSignature OnDamageTaken;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnDamageTakenSignature OnHitDamageTaken;
+
+	UFUNCTION()
+	void HandleDamageTaken(int32 DamageAmount);
+
+	UFUNCTION()
+	void HitDamageTaken(int32 DamageAmount);
+
+	// ヘッダ側
+	UPROPERTY(VisibleAnywhere)
+	int32 TotalDamage = 0;
 
 protected:
 	// Called when the game starts or when spawned
